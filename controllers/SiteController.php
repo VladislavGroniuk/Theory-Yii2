@@ -128,16 +128,23 @@ class SiteController extends Controller
             'totalCount'=>$comments->count()
         ]);
         $comments=$comments->offset($pagination->offset)->limit($pagination->limit)->all();
+
+        $cookies=Yii::$app->request->cookies;
+
+
         return $this->render("comments",[
             'comments'=>$comments,
             'pagination'=>$pagination,
-            'name'=>Yii::$app->session->get('name')
+            'name'=>$cookies->getValue('name')
         ]);
     }
     public function actionUser(){
         $name=Yii::$app->request->get('name','Guest');
-        $session=Yii::$app->session;
-        $session->set('name',$name);
+        $cookies=Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie([
+            'name'=>'name',
+            'value'=>$name
+        ]));
         return $this->render('user',[
             'name'=>$name
         ]);
