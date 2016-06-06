@@ -133,4 +133,10 @@ class SiteController extends Controller
             'pagination'=>$pagination
         ]);
     }
+    public function actionUser(){
+        $name=Yii::$app->request->get('name','Guest');
+        return $this->render('user',[
+            'name'=>$name
+        ]);
+    }
 }
