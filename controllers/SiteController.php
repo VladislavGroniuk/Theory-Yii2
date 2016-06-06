@@ -130,11 +130,14 @@ class SiteController extends Controller
         $comments=$comments->offset($pagination->offset)->limit($pagination->limit)->all();
         return $this->render("comments",[
             'comments'=>$comments,
-            'pagination'=>$pagination
+            'pagination'=>$pagination,
+            'name'=>Yii::$app->session->get('name')
         ]);
     }
     public function actionUser(){
         $name=Yii::$app->request->get('name','Guest');
+        $session=Yii::$app->session;
+        $session->set('name',$name);
         return $this->render('user',[
             'name'=>$name
         ]);
