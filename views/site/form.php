@@ -6,5 +6,6 @@
 <?php $f=ActiveForm::begin(); ?>
     <?=$f->field($form,'name')?>
     <?=$f->field($form,'email')?>
+    <?=$f->field($form,'file')->fileInput()?>
     <?=Html::submitButton("Отправить")?>
 <?php ActiveForm::end(); ?>
